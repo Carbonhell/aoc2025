@@ -15,7 +15,7 @@ struct Args {
     input_path: String,
 }
 fn main() {
-    tracing_subscriber::fmt().with_max_level(tracing::Level::INFO).init();
+    tracing_subscriber::fmt::init();
     let args = Args::parse();
     let file = File::open(args.input_path).unwrap();
     let input_lines = std::io::BufReader::new(file).lines();
