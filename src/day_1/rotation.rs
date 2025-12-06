@@ -16,7 +16,6 @@ impl Display for RotationDirection {
     }
 }
 
-
 #[derive(Debug)]
 pub struct Rotation {
     pub(crate) direction: RotationDirection,

@@ -1,2 +1,3 @@
 [tools]
 jj = "0.35"
+jjui = "latest"
