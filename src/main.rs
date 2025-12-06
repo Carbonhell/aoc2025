@@ -1,6 +1,6 @@
+use clap::Parser;
 use std::fs::File;
 use std::io::BufRead;
-use clap::Parser;
 
 mod day_1;
 mod day_2;

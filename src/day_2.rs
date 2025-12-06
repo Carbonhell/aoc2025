@@ -1,6 +1,6 @@
 mod id;
 
-use crate::day_2::id::generate_invalid_ids;
+use crate::day_2::id::{generate_invalid_ids_at_least_twice, generate_invalid_ids_exactly_twice};
 use std::io::Lines;
 use tracing::instrument;
 
@@ -15,10 +15,23 @@ pub fn day_2_solution(mut input: Lines<impl std::io::BufRead>) {
             (parts.next().unwrap(), parts.next().unwrap())
         })
         .collect::<Vec<_>>();
-    let invalid_ids = input
+    let invalid_ids_exactly_2 = input
         .iter()
-        .map(|x| generate_invalid_ids(*x))
+        .map(|x| generate_invalid_ids_exactly_twice(*x))
         .flatten()
         .collect::<Vec<_>>();
-    println!("Sum of invalid IDs: {:?}", invalid_ids.iter().sum::<u64>());
+
+    println!(
+        "Sum of invalid IDs (with exactly 2 repeated subsequences): {:?}",
+        invalid_ids_exactly_2.iter().sum::<u64>()
+    );
+    let invalid_ids_at_least_2 = input
+        .iter()
+        .map(|x| generate_invalid_ids_at_least_twice(*x))
+        .flatten()
+        .collect::<Vec<_>>();
+    println!(
+        "Sum of invalid IDs (with at least 2 repeated subsequences): {:?}",
+        invalid_ids_at_least_2.iter().sum::<u64>()
+    );
 }
