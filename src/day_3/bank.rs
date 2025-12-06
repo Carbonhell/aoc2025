@@ -20,7 +20,7 @@ impl Bank {
     fn battery_with_max_joltage(&self, from: Option<usize>, to: Option<usize>) -> usize {
         debug!(?from, ?to, "searching for battery with max joltage");
         let from = match from {
-            Some(x) => x+1,
+            Some(x) => x + 1,
             None => 0,
         };
         let to = match to {
@@ -31,13 +31,7 @@ impl Bank {
         let battery = self.batteries[from..to]
             .iter()
             .enumerate()
-            .reduce(|acc, x|
-                if x.1 > acc.1 {
-                    x
-                } else {
-                    acc
-                }
-            )
+            .reduce(|acc, x| if x.1 > acc.1 { x } else { acc })
             .unwrap() // The reduce operation is a customized max(), and a bank is guaranteed to have at least 2 batteries at construction time
             .0;
         battery + from

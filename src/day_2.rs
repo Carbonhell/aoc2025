@@ -17,8 +17,7 @@ pub fn day_2_solution(mut input: Lines<impl std::io::BufRead>) {
         .collect::<Vec<_>>();
     let invalid_ids_exactly_2 = input
         .iter()
-        .map(|x| generate_invalid_ids_exactly_twice(*x))
-        .flatten()
+        .flat_map(|x| generate_invalid_ids_exactly_twice(*x))
         .collect::<Vec<_>>();
 
     println!(
@@ -27,8 +26,7 @@ pub fn day_2_solution(mut input: Lines<impl std::io::BufRead>) {
     );
     let invalid_ids_at_least_2 = input
         .iter()
-        .map(|x| generate_invalid_ids_at_least_twice(*x))
-        .flatten()
+        .flat_map(|x| generate_invalid_ids_at_least_twice(*x))
         .collect::<Vec<_>>();
     println!(
         "Sum of invalid IDs (with at least 2 repeated subsequences): {:?}",

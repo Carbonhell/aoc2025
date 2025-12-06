@@ -64,7 +64,8 @@ pub fn generate_invalid_ids_at_least_twice(range: (u64, u64)) -> Vec<u64> {
                     // If we have the list of divisors [1,2,3,5] (for i=30), we'll use 29, 28, 27, 25 to get the resulting number of first digits
                     let base_digits = base / 10_u64.pow(digit_range - divisor);
                     let ceil_digits = ceil / 10_u64.pow(digit_range - divisor);
-                    let result = (base_digits..=ceil_digits)
+                    
+                    (base_digits..=ceil_digits)
                         .map(|el| {
                             let mut result = 0;
                             let el_digits = el.ilog10() + 1;
@@ -75,13 +76,12 @@ pub fn generate_invalid_ids_at_least_twice(range: (u64, u64)) -> Vec<u64> {
                                 // Example: 10 with decimal_place = 1, el_digits = 2, result 10^(1^2) = 10^1 (10)
                                 // Example: 10 with decimal_place = 2, el_digits = 2, result 10^(2) 100 (1010)
                                 // Example: 10 with decimal_place = 3, el_digits = 2, result 10^(2*2) 10000 (101010)
-                                result += el * 10_u64.pow(((decimal_place - 1) * el_digits))
+                                result += el * 10_u64.pow((decimal_place - 1) * el_digits)
                             }
                             result
                         })
                         .filter(|&el| el >= start && el <= end) // todo this could probably be moved outside as an optimization
-                        .collect::<Vec<_>>();
-                    result
+                        .collect::<Vec<_>>()
                 })
                 .flatten()
                 .collect::<Vec<_>>()
