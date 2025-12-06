@@ -64,7 +64,7 @@ pub fn generate_invalid_ids_at_least_twice(range: (u64, u64)) -> Vec<u64> {
                     // If we have the list of divisors [1,2,3,5] (for i=30), we'll use 29, 28, 27, 25 to get the resulting number of first digits
                     let base_digits = base / 10_u64.pow(digit_range - divisor);
                     let ceil_digits = ceil / 10_u64.pow(digit_range - divisor);
-                    
+
                     (base_digits..=ceil_digits)
                         .map(|el| {
                             let mut result = 0;
