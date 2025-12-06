@@ -3,6 +3,7 @@ use std::io::BufRead;
 use clap::Parser;
 
 mod day_1;
+mod day_2;
 
 /// Execute the solution for a specific day
 #[derive(Parser, Debug)]
@@ -21,6 +22,7 @@ fn main() {
     let input_lines = std::io::BufReader::new(file).lines();
     match args.day {
         1 => day_1::day_1_solution(input_lines),
+        2 => day_2::day_2_solution(input_lines),
         _ => panic!("Day {} not implemented yet", args.day),
     }
 }
