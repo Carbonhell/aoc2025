@@ -48,7 +48,7 @@ impl Display for Grid {
 
 impl Grid {
     /// Allows generating a grid from a vec of lines, where each line is a row with a char representing a cell.
-    pub fn from_lines(lines: Vec<&str>) -> Self {
+    pub fn from_lines(lines: &Vec<&str>) -> Self {
         if lines.is_empty() {
             panic!("Empty grid")
         }
@@ -119,6 +119,23 @@ impl Grid {
             .filter(|x| **x == Cell::ReachablePaper)
             .count()
     }
+
+    pub fn remove_reachable_paper(&mut self) -> Option<usize> {
+        let count = self.reachable_paper_count();
+        self.space = self
+            .space
+            .iter()
+            .map(|x| {
+                if *x == Cell::ReachablePaper {
+                    Cell::Empty
+                } else {
+                    *x
+                }
+            })
+            .collect();
+        debug!(%count, "space state after removal\n{self}");
+        if count == 0 { None } else { Some(count) }
+    }
 }
 
 #[cfg(test)]
@@ -128,7 +145,7 @@ mod tests {
 
     #[test]
     fn test_example() {
-        let mut grid = Grid::from_lines(vec![
+        let mut grid = Grid::from_lines(&vec![
             "..@@.@@@@.",
             "@@@.@.@.@@",
             "@@@@@.@.@@",
