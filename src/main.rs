@@ -7,6 +7,7 @@ mod day_2;
 mod day_3;
 mod day_4;
 mod day_5;
+mod day_6;
 
 /// Execute the solution for a specific day
 #[derive(Parser, Debug)]
@@ -29,6 +30,7 @@ fn main() {
         3 => day_3::day_3_solution(input_lines),
         4 => day_4::day_4_solution(input_lines),
         5 => day_5::day_5_solution(input_lines),
+        6 => day_6::day_6_solution(input_lines),
         _ => panic!("Day {} not implemented yet", args.day),
     }
 }
